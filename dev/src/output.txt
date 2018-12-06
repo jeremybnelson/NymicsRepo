@@ -1,0 +1,45 @@
+============================= test session starts =============================
+platform win32 -- Python 3.6.6, pytest-3.8.1, py-1.6.0, pluggy-0.7.1
+rootdir: C:\udp-app-master\dev\src, inifile:
+LOG: common.py:472 | log_session_info | INFO | Script_name:  pytest
+LOG: common.py:473 | log_session_info | INFO | Script path:  C:\udp-app-master\venv\Scripts
+LOG: common.py:474 | log_session_info | INFO | Current dir:  C:\udp-app-master\dev\src
+LOG: common.py:475 | log_session_info | INFO | Parameters:   ['-s']
+LOG: common.py:476 | log_session_info | INFO | Process id:   8952
+LOG: common.py:478 | log_session_info | INFO | User name:    jeremy.nelson
+LOG: common.py:479 | log_session_info | INFO | OS platform:  10.0.14393
+LOG: common.py:480 | log_session_info | INFO | Host name:    LTATR-019326
+LOG: common.py:481 | log_session_info | INFO | Host IP:      10.1.0.110
+LOG: common.py:492 | log_session_info | INFO | Docker ver:   
+LOG: common.py:493 | log_session_info | INFO | Docker name:  
+LOG: common.py:494 | log_session_info | INFO | Docker id:    
+LOG: common.py:495 | log_session_info | INFO | Docker type:  
+LOG: common.py:497 | log_session_info | INFO | Python ver:   3.6.6 (v3.6.6:4cf1f54eb7, Jun 27 2018, 03:37:03) [MSC v.1900 64 bit (AMD64)]
+LOG: common.py:498 | log_session_info | INFO | Python exe:   c:\udp-app-master\venv\scripts\python.exe
+LOG: common.py:499 | log_session_info | INFO | Python path:  ['C:\\udp-app-master\\dev\\src', 'C:\\udp-app-master\\venv\\Scripts\\pytest.exe', 'c:\\udp-app-master\\venv\\scripts\\python36.zip', 'C:\\Users\\jeremy.nelson\\AppData\\Local\\Programs\\Python\\Python36\\DLLs', 'C:\\Users\\jeremy.nelson\\AppData\\Local\\Programs\\Python\\Python36\\lib', 'C:\\Users\\jeremy.nelson\\AppData\\Local\\Programs\\Python\\Python36', 'c:\\udp-app-master\\venv', 'c:\\udp-app-master\\venv\\lib\\site-packages', 'C:\\Users\\jeremy.nelson\\AppData\\Local\\Programs\\Python\\Python36\\lib\\site-packages']
+LOG: common.py:501 | log_session_info | INFO | CPU count:    8
+LOG: common.py:502 | log_session_info | INFO | Disk used:    118,241,234,944 bytes
+LOG: common.py:503 | log_session_info | INFO | Disk free:    134,598,746,112 bytes
+LOG: common.py:504 | log_session_info | INFO | Boot time:    2018-11-15 08:55:40
+
+collected 2 items
+
+test_cloud.py LOG: config.py:528 | load_file | INFO | ConfigSectionKey.load_file(../conf/azure.ini)
+LOG: config.py:594 | load_section | INFO | ../conf/azure.ini(2): [cloud]
+LOG: config.py:493 | debug | INFO | ../conf/azure.ini(5): [cloud].platform = azure; @initial-value
+LOG: config.py:493 | debug | INFO | ../conf/azure.ini(6): [cloud].account_id = sandboxstoragejbn; @initial-value
+LOG: config.py:493 | debug | INFO | ../conf/azure.ini(7): [cloud].account_alias = @empty; @initial-value
+LOG: config.py:493 | debug | INFO | ../conf/azure.ini(8): [cloud].region = @empty; @initial-value
+LOG: config.py:493 | debug | INFO | ../conf/azure.ini(12): [cloud].admin_objectstore = admin; @initial-value
+LOG: config.py:493 | debug | INFO | ../conf/azure.ini(13): [cloud].archive_objectstore = archive; @initial-value
+LOG: config.py:493 | debug | INFO | ../conf/azure.ini(14): [cloud].capture_objectstore = capture; @initial-value
+LOG: config.py:493 | debug | INFO | ../conf/azure.ini(15): [cloud].capture_queue = capture-queue; @initial-value
+LOG: config.py:493 | debug | INFO | ../conf/azure.ini(18): [cloud].storage_key = OeDme2lTFotrplfYFHFPw6SrjpiXMjoWa90mG550ToO6j8kAmMMjkP9p3FzWIM0wXg2uP9NQelT6xWAoujrxmA==; @initial-value
+LOG: config.py:493 | debug | INFO | ../conf/azure.ini(19): [cloud].sas_token = ?sv=2017-11-09&ss=bfqt&srt=sco&sp=rwdlacup&se=2020-11-02T02:55:36Z&st=2018-11-01T17:55:36Z&spr=https,http&sig=2jau5VDeC5a1AJ1uqV7z4e69RIK57mx3T778rdJk8a4%3D; @initial-value
+.LOG: cloud_az.py:72 | _connect | INFO | aws._connect.<class 'azure.storage.blob.blockblobservice.BlockBlobService'>
+LOG: cloud_az.py:122 | get | INFO | capture.get(file_name=C:/test/get/test.txt, object_key=test.txt)
+LOG: storageclient.py:318 | _perform_request | INFO | Client-Request-ID=9640da3a-e8f6-11e8-8ed0-0019d2fed47b Outgoing request: Method=GET, Path=/capture/test.txt, Query={'snapshot': None, 'timeout': None, 'sv': '2017-11-09', 'ss': 'bfqt', 'srt': 'sco', 'sp': 'rwdlacup', 'se': '2020-11-02T02:55:36Z', 'st': '2018-11-01T17:55:36Z', 'spr': 'https,http', 'sig': 'REDACTED'}, Headers={'x-ms-lease-id': None, 'If-Modified-Since': None, 'If-Unmodified-Since': None, 'If-Match': None, 'If-None-Match': None, 'x-ms-range': 'bytes=0-33554431', 'x-ms-version': '2018-03-28', 'User-Agent': 'Azure-Storage/1.4.0-1.4.0 (Python CPython 3.6.6; Windows 10)', 'x-ms-client-request-id': '9640da3a-e8f6-11e8-8ed0-0019d2fed47b', 'x-ms-date': 'Thu, 15 Nov 2018 16:50:41 GMT'}.
+LOG: storageclient.py:337 | _perform_request | INFO | Client-Request-ID=9640da3a-e8f6-11e8-8ed0-0019d2fed47b Receiving Response: Server-Timestamp=Thu, 15 Nov 2018 16:50:41 GMT, Server-Request-ID=c7a48303-001e-0069-7703-7d0a6d000000, HTTP Status Code=206, Message=Partial Content, Headers={'content-length': '12', 'content-type': 'application/octet-stream', 'content-range': 'bytes 0-11/12', 'last-modified': 'Thu, 15 Nov 2018 16:08:25 GMT', 'accept-ranges': 'bytes', 'etag': '"0x8D64B1492A3C753"', 'server': 'Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0', 'x-ms-request-id': 'c7a48303-001e-0069-7703-7d0a6d000000', 'x-ms-version': '2018-03-28', 'x-ms-creation-time': 'Thu, 15 Nov 2018 16:08:25 GMT', 'x-ms-blob-content-md5': 'grtBN0au5C+J3qK1lhT57w==', 'x-ms-lease-status': 'unlocked', 'x-ms-lease-state': 'available', 'x-ms-blob-type': 'BlockBlob', 'x-ms-server-encrypted': 'true', 'date': 'Thu, 15 Nov 2018 16:50:41 GMT'}.
+.
+
+========================== 2 passed in 0.92 seconds ===========================
