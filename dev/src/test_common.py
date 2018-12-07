@@ -48,9 +48,20 @@ from common import diskspace_used
 from common import memory_available
 from common import memory_total
 
-
 from common import to_int
+from common import delete_empty_entries
+from common import is_empty
+from common import is_sequence
+from common import to_list
 
+from common import describe
+from common import actual_file_name
+from common import full_path
+from common import just_path
+from common import just_file_name
+from common import just_file_stem
+from common import just_file_ext
+from common import parent_path
 from common import save_text
 
 # 3rd party libs
@@ -437,7 +448,7 @@ def test_diskspace_used():
     assert diskspace_used(path_name=f'{test_folder_path}/') == shutil.disk_usage(f'{test_folder_path}/')[1]
     # standard assertions
     assert diskspace_used(path_name=f'{test_folder_path}/') > 0
-    assert diskspace_used(path_name=f'{test_folder_path}/') < 120000000000
+    assert diskspace_used(path_name=f'{test_folder_path}/') < 150000000000
     assert isinstance(diskspace_used(), int) is True
     teardown_test_files()
 
@@ -475,21 +486,54 @@ def test_to_int():
 
 # list operations ...
 def test_delete_empty_entries():
-    pass
+    test_list = ['foo', None, 'baz', 'qux', '']
+    cleaned_list = delete_empty_entries(test_list)
+    assert len(cleaned_list) == 3
+    assert cleaned_list[0] == 'foo'
+    assert cleaned_list[1] == 'baz'
+    assert cleaned_list[2] == 'qux'
 
 
 def test_is_empty():
-    pass
+    empty_list = []
+    not_empty_list = ['foo', None, 'baz', 'qux', '']
+    empty_str = ''
+    not_empty_str = 'abc'
+    # Question: Should an is_empty(empty_list) return True
+    assert is_empty(empty_list) is False
+    assert is_empty(not_empty_list) is False
+    assert is_empty(empty_str) is True
+    assert is_empty(not_empty_str) is False
+    assert is_empty(None) is True
 
 
 def test_is_sequence():
+    test_list = ['foo', None, 'baz', 'qux', '']
+    empty_str = ''
+    assert is_sequence(test_list) is True
+    assert is_sequence(empty_str) is False
     pass
+
+
+def test_to_list():
+    str_test = 'foo, None, baz, 1,  , 3'
+    str_list = to_list(str_test)
+    print(str_list[4])
+    #print(str_list[5])
+    """
+    assert len(str_list) == 5
+    assert str_list[0] == 'foo'
+    assert str_list[1] == 'None'
+    assert str_list[2] == 'baz'
+    assert str_list[3] == '1'
+    assert str_list[4] == ''
+    assert str_list[5] == '3'
+    """
+
+
+test_to_list()
 
 """
-def to_list(obj, delimiters=', '):
-    pass
-
-
 # object operations ...
 def describe(obj, attribute_names):
     pass

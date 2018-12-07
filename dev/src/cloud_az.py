@@ -194,6 +194,9 @@ class Queue(Connect):
 
 	def _pre_connect(self):
 		self.resource_type = QueueService
+		# switch to base64 encoding instead of XML encoding
+		self.resource_type.encode_function = QueueMessageFormat.text_base64encode
+		self.resource_type.encode_function = QueueMessageFormat.text_base64encode
 		# I think this is needed to replicate the event subscription for automatic queue messages
 		# self.resource_type.require_encryption = True
 		self.queue_name = self.connection.capture_queue
@@ -306,6 +309,7 @@ class Queue(Connect):
 
 		logger.info(self._describe('put', message))
 		try:
+			self.client.encode_function = QueueMessageFormat.text_xmlencode
 			response = self.client.put_message(
 				queue_name=self.queue_name,
 				content=message,
@@ -346,14 +350,6 @@ class ObjectstoreNotification:
 		if response:
 			message = response.content
 
-			# add padding if message is not divisible by 4
-			missing_padding = len(message) % 4
-			if missing_padding:
-				message += '=' * (4 - missing_padding)
-
-			print(message)
-			print(len(message))
-
 			# decodes the content section of the azure.storage.queue.models.QueueMessage object
 			decoded_message = base64.b64decode(message).decode('utf-8')
 			try:
@@ -370,7 +366,7 @@ class ObjectstoreNotification:
 				# body = json.loads(message)
 				self.message_id = response.id
 				self.pop_receipt = response.pop_receipt
-				self.message = str(message)
+				self.message = decoded_message
 				self.timestamp = body['eventTime']
 				# Clean this up. Probably can just use split instead of re
 				self.objectstore_name = re.split(' - |/', body['subject'])[4]
@@ -427,17 +423,39 @@ def main():
 	queue_message = '{"Message":"Hello World"}'
 	# encoded_message = str(base64.b64encode(queue_message.encode('utf-8')))
 
-	# queue.put(encoded_message)
+	queue_message = {
+	"topic": "test_queue_message",
+	"subject": "/This/Is/A/Test/Message/TestMessage",
+	"eventType": "test_queue_message",
+	"eventTime": "",
+	"id": "",
+	"data":{
+		"api": "",
+		"clientRequestId": "",
+		"requestId": "",
+		"eTag": "",
+		"contentType": "",
+		"contentLength": 0,
+		"blobType": "",
+		"url": "",
+		"sequencer": "",
+		"storageDiagnostics": {
+			"batchId": ""
+		}
+	},
+		"dataVersion": "",
+		"metadataVersion": "1"
+	}
+
+	json_queue_message = json.dumps(queue_message)
+
+
 	# response = queue.get()
 	# notification = ObjectstoreNotification(response)
-	#queue.put('Hello World')
-	# queue.put(queue_message)
-
-
+	queue.put(json_queue_message)
 	response = queue.get()
-	print(response)
-	#notification = ObjectstoreNotification(response)
-	#queue.delete(notification)
+	notification = ObjectstoreNotification(response)
+	queue.delete(notification)
 	"""
 	while True:
 		time.sleep(1)
